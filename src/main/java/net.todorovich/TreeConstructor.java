@@ -55,34 +55,6 @@ public class TreeConstructor
         return rootNode;
     }
 
-
-    static boolean isPowerOfTwo(int x)
-    {
-        return (x & (x - 1)) == 0;
-    }
-
-    public static void printTree(StringBuilder stringBuilder, Node rootNode, int index)
-    {
-        if (index == 1)
-            stringBuilder.append(rootNode.value).append('\n');
-
-        for (Node child : rootNode.children)
-        {
-            stringBuilder.append(child.value).append(' ');
-        }
-        if (isPowerOfTwo(index)) stringBuilder.append('\n');
-
-        int newIndex = index + 1;
-        for (Node child : rootNode.children)
-        {
-            printTree(stringBuilder, child, newIndex);
-            newIndex++;
-        }
-
-        if (index == 1)
-            logger.info(stringBuilder.toString());
-    }
-
     public static void recurse(
         @Nullable Node parentNode, Node currentNode, Pair[] edges, Multimap<Integer, Integer> edgeIndexByValue
     )
@@ -110,6 +82,33 @@ public class TreeConstructor
         {
             recurse(currentNode, childNode, edges, edgeIndexByValue);
         }
+    }
+
+    static boolean isPowerOfTwo(int x)
+    {
+        return (x & (x - 1)) == 0;
+    }
+
+    public static void printTree(StringBuilder stringBuilder, Node rootNode, int index)
+    {
+        if (index == 1)
+            stringBuilder.append(rootNode.value).append('\n');
+
+        for (Node child : rootNode.children)
+        {
+            stringBuilder.append(child.value).append(' ');
+        }
+        if (isPowerOfTwo(index)) stringBuilder.append('\n');
+
+        int newIndex = index + 1;
+        for (Node child : rootNode.children)
+        {
+            printTree(stringBuilder, child, newIndex);
+            newIndex++;
+        }
+
+        if (index == 1)
+            logger.info(stringBuilder.toString());
     }
 
     public static void main(String[] args)
